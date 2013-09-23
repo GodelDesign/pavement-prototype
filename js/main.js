@@ -27,7 +27,8 @@ function gup(name, _url) {
 function embedVideo(_vid) {
   var videoID = _vid || 'nd7XatmTSTM';
 // loadVideoById(videoID, 5, "large");
-    $('#video').html('<iframe width="640" height="360"  src="http://www.youtube.com/embed/'+videoID+'" frameborder="0" allowfullscreen></iframe>');
+    $('#video').html('<iframe width="640" height="360"  src="http://www.youtube.com/embed/'+videoID+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+    $('#video').trigger('click');
 }
 
 /* parse a YouTube URL to get the 11-digit Video ID - courtesy of @jeffreypriebe */
@@ -43,12 +44,12 @@ function getYouTubeID(url) {
     }
 }
 
-/* input listener */
-$('#youtube').bind('input keyup change', function() {
-    var youtubeURL = $(this).val();
-    var vid = getYouTubeID(youtubeURL);
-    embedVideo(vid);
-});
+// /* input listener */
+// $('#youtube').bind('input keyup change', function() {
+//     var youtubeURL = $(this).val();
+//     var vid = getYouTubeID(youtubeURL);
+//     embedVideo(vid);
+// });
 
 /* trying to make my own input from click */
 $('.links > a').on('click', function(e) {
