@@ -26,9 +26,7 @@ function gup(name, _url) {
 /* embed a YouTube video using the new simplified iFrame embed code */
 function embedVideo(_vid) {
   var videoID = _vid || 'nd7XatmTSTM';
-// loadVideoById(videoID, 5, "large");
     $('#video').html('<iframe width="640" height="360"  src="http://www.youtube.com/embed/'+videoID+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
-    $('#video').trigger('click');
 }
 
 /* parse a YouTube URL to get the 11-digit Video ID - courtesy of @jeffreypriebe */
@@ -44,21 +42,12 @@ function getYouTubeID(url) {
     }
 }
 
-// /* input listener */
-// $('#youtube').bind('input keyup change', function() {
-//     var youtubeURL = $(this).val();
-//     var vid = getYouTubeID(youtubeURL);
-//     embedVideo(vid);
-// });
-
 /* trying to make my own input from click */
 $('.links > a').on('click', function(e) {
   e.preventDefault();
     var youtubeURL = $(this).attr('href');
     var vid = getYouTubeID(youtubeURL);
     console.log(vid);
-     // $('#youtube').val(youtubeURL);
-     // $('#youtube').trigger( "keyup" );
     embedVideo(vid);
 });
 
