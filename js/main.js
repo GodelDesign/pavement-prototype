@@ -58,7 +58,7 @@ $('.links > a').on('click', function(e) {
     console.log(vid);
      // $('#youtube').val(youtubeURL);
      // $('#youtube').trigger( "keyup" );
-    embedVideo(vid)
+    embedVideo(vid);
 });
 
 
