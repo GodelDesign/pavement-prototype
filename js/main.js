@@ -1,12 +1,13 @@
 (function($){
 
-/* load youtube api */
-      var tag = document.createElement('script');
+// /* load youtube api */
+//       var tag = document.createElement('script');
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      var player;
+//       tag.src = "https://www.youtube.com/iframe_api";
+//       var firstScriptTag = document.getElementsByTagName('script')[0];
+//       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+//       var player;
+
 
 
 /* Derived from NetLobo GUP function by Justin Barlow */
@@ -26,8 +27,26 @@ function gup(name, _url) {
 /* embed a YouTube video using the new simplified iFrame embed code */
 function embedVideo(_vid) {
   var videoID = _vid || 'nd7XatmTSTM';
-    $('#video').html('<iframe width="640" height="360"  src="http://www.youtube.com/embed/'+videoID+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+      var ytplayer;
+      if(window.ytplayer) {
+        window.ytplayer.loadVideoById(_vid);
+      }
+      else {
+        window.ytplayer = new YT.Player('video', {
+          height: '390',
+          width: '640',
+          videoId: _vid,
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
 }
+
+function onPlayerReady(event) {
+  window.ytplayer.playVideo();
+}
+
 
 /* parse a YouTube URL to get the 11-digit Video ID - courtesy of @jeffreypriebe */
 function getYouTubeID(url) {
@@ -47,7 +66,6 @@ $('.links > a').on('click', function(e) {
   e.preventDefault();
     var youtubeURL = $(this).attr('href');
     var vid = getYouTubeID(youtubeURL);
-    console.log(vid);
     embedVideo(vid);
 });
 
